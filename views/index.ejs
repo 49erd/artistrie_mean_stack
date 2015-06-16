@@ -44,7 +44,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-6 col-xs-offset-3 text-center">
-				Search: <input type="text" ng-model="search.name"><br>
+				Search: <input type="text" ng-model="search.title"><br>
 			</div>
 		</div>
 		<div class="row">
@@ -65,7 +65,7 @@
 				<ul>
 				    <span ng-repeat="piece in pieces | filter: search">
 				   		<a href=#/{{piece._id}}><h2>{{piece.title}}<h2></a>
-				   		<img src="{{piece.img_url}}" alt=""><br>
+				   		<a href=#/{{piece._id}}><img src="{{piece.img_url}}" alt=""></a><br>
 				   		<h4>Description: {{piece.description}}</h4>
 				   		<a ng-show="!editing[$index]" href="#/"></a>
 
