@@ -3,42 +3,103 @@
   <title>Artistrie</title>
 </head>
 <body>
- 
+<!-- 	<div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="#/">Artistrie</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#/">Home</a></li>
+              <li><a ng-href="#/about">About</a></li>
+              <li><a ng-href="#/contact">Contact</a></li>
+              <li><a ng-href="#/pieces">Art Submissions</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
 <ng-view></ng-view>
  
 <!-- Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
- 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
 <!-- Template -->   
 <script type="text/ng-template" id="/pieces.html">
-  Search: <input type="text" ng-model="search.name">
-  <ul>
-    <li ng-repeat="piece in pieces | filter: search">
-   		<a href=#/{{piece._id}}>{{piece.title}}</a>
-    
-    //   <input type="checkbox" ng-model="piece.completed" ng-change="update($index)">
-    //   <a ng-show="!editing[$index]" href="#/"></a>
-    //   <button ng-show="!editing[$index]" ng-click="edit($index)">edit</button>
-    //   <button ng-show="!editing[$index]" ng-click="remove($index)">remove</button>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3 text-center">
+				Search: <input type="text" ng-model="search.name"><br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3 text-center">
+				Submit New Entry:
+				<form ng-model="newPiece">
+		          	<input type="text" ng-model="pieceTitle" placeholder="title"><br>
+		            <textarea ng-model="pieceDescription" placeholder="Describe your art piece" required></textarea><br>
+		            <input type="text" ng-model="pieceImage" placeholder="image url"><br>
+		            <button class="btn btn-primary" ng-click="save()">Submit</button>
+	    		</form>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2 text-center">
+				<ul>
+				    <span ng-repeat="piece in pieces | filter: search">
+				   		<a href=#/{{piece._id}}><h2>{{piece.title}}<h2></a>
+				   		<img src="{{piece.img_url}}" alt=""><br>
+				   		<h4>Description: {{piece.description}}</h4>
+				   		<a ng-show="!editing[$index]" href="#/"></a>
 
-    //   <input ng-show="editing[$index]" type="text" ng-model="piece.name">
-    //   <button ng-show="editing[$index]" ng-click="update($index)">Update</button>
-    //   <button ng-show="editing[$index]" ng-click="cancel($index)">Cancel</button>
-    // </li>
-  </ul>
-  New task <input type="text" ng-model="newPiece"><button ng-click="save()">Create</button>
+				    	<button ng-show="!editing[$index]" ng-click="edit($index)">edit</button>
+
+				      <input ng-show="editing[$index]" type="text" ng-model="piece.description">
+				      <button ng-show="editing[$index]" ng-click="update($index)">Update</button>
+				      <button ng-show="editing[$index]" ng-click="cancel($index)">Cancel</button>
+
+				    </span>
+	  			</ul>
+			</div>
+		</div>
+	</div>
 </script>
   
 <script type="text/ng-template" id="/pieceDetails.html">
-  <h1></h1>
-  completed: <input type="checkbox" ng-model="piece.completed"><br>
-  note: <textarea ng-model="piece.note"></textarea><br><br>
+<img src="{{piece.img_url}}" alt="">
+  <h1>{{piece.title}}</h1>
+  description: <textarea ng-model="piece.description"></textarea><br><br>
 
   <button ng-click="update()">Update</button>
   <button ng-click="remove()">remove</button>
   <a href="/">Cancel</a>
+</script>
+
+<script type="text/ng-template" id="/contact.html">
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2 text-center">
+				<h1>GO AWAY</h1>
+			</div>
+		</div>
+	</div>
 </script>
  
 <script>
@@ -50,17 +111,19 @@ angular.module('app', ['ngRoute', 'ngResource'])
       });
     }])
 
-    .controller('PieceController', ['$scope', 'Pieces', function ($scope, Pieces) {
+    .controller('PieceCtrl', ['$scope', 'Pieces', function ($scope, Pieces) {
       $scope.editing = [];
       $scope.pieces = Pieces.query();
 
       $scope.save = function(){
-        if(!$scope.newPiece || $scope.newPiece.length < 1) return;
-        var piece = new Pieces({ name: $scope.newPiece, completed: false });
+        if(!$scope.pieceTitle || $scope.pieceTitle.length < 1) return;
+        var piece = new Pieces({ title: $scope.pieceTitle, img_url: $scope.pieceImage, description: $scope.pieceDescription });
 
         piece.$save(function(){
           $scope.pieces.push(piece);
-          $scope.newPiece = ''; // clear textbox
+          $scope.pieceTitle = ''; // clear textbox
+          $scope.pieceDescription = '';
+          $scope.pieceImage = '';
         });
       }
 
@@ -79,10 +142,10 @@ angular.module('app', ['ngRoute', 'ngResource'])
         $scope.editing[index] = false;
       }
 
-                $scope.remove = function(index){
-            var piece = $scope.pieces[index];
-            Pieces.remove({id: piece._id}, function(){
-              $scope.pieces.splice(index, 1);
+      $scope.remove = function(index){
+           var piece = $scope.pieces[index];
+           Pieces.remove({id: piece._id}, function(){
+            	$scope.pieces.splice(index, 1);
             });
           }
     }])
@@ -102,18 +165,27 @@ angular.module('app', ['ngRoute', 'ngResource'])
         });
       }
     }])
+
+   	.controller('ContactCtrl', ['$scope', function ($scope) {
+
+   	}])
   
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: '/pieces.html',
-        controller: 'PieceController'
+        controller: 'PieceCtrl'
       })
     
       .when('/:id', {
         templateUrl: '/pieceDetails.html',
         controller: 'PieceDetailCtrl'
-     });
+      })
+
+      .when('/contact', {
+      	templateUrl: '/contact.html',
+      	controller: 'ContactCtrl'
+      });
   }]);
 </script>
  
