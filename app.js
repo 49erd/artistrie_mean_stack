@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/todoApp', function(err) {
+mongoose.connect('mongodb://localhost/ArtistrieApp', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost/todoApp', function(err) {
 });
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var pieces = require('./routes/pieces');
 
 var app = express();
 
@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/pieces', pieces);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
