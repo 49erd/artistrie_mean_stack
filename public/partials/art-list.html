@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3 text-center">
+			Search: <input type="text" ng-model="search.title"><br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3 text-center">
+			Submit New Entry:
+			<form ng-model="newPiece">
+	          	<input type="text" ng-model="pieceTitle" placeholder="title"><br>
+	            <textarea ng-model="pieceDescription" placeholder="Describe your art piece" required></textarea><br>
+	            <input type="text" ng-model="pieceImage" placeholder="image url"><br>
+	            <button class="btn btn-primary" ng-click="save()">Submit</button>
+    		</form>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-2 text-center">
+			<ul>
+			    <span ng-repeat="piece in pieces | filter: search">
+			   		<a href=#/{{piece._id}}><h2>{{piece.title}}<h2></a>
+			   		<a href=#/{{piece._id}}><img src="{{piece.img_url}}" alt=""></a><br>
+			   		<h4>Description: {{piece.description}}</h4>
+			   		<a ng-show="!editing[$index]" href="#/"></a>
+
+			    	<button ng-show="!editing[$index]" ng-click="edit($index)">edit</button>
+
+			      <input ng-show="editing[$index]" type="text" ng-model="piece.description">
+			      <button ng-show="editing[$index]" ng-click="update($index)">Update</button>
+			      <button ng-show="editing[$index]" ng-click="cancel($index)">Cancel</button>
+
+			    </span>
+  			</ul>
+		</div>
+	</div>
+</div>
