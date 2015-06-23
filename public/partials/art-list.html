@@ -21,8 +21,8 @@
 		<div class="col-xs-8 col-xs-offset-2 text-center">
 			<ul>
 			    <span ng-repeat="piece in pieces | filter: search">
-			   		<a href=#/{{piece._id}}><h2>{{piece.title}}<h2></a>
-			   		<a href=#/{{piece._id}}><img src="{{piece.img_url}}" alt=""></a><br>
+			   		<a href=#/list/{{piece._id}}><h2>{{piece.title}}<h2></a>
+			   		<a href=#/list/{{piece._id}}><img src="{{piece.img_url}}" alt=""></a><br>
 			   		<h4>Description: {{piece.description}}</h4>
 			   		<a ng-show="!editing[$index]" href="#/"></a>
 

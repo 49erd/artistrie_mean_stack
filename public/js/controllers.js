@@ -59,4 +59,8 @@ Artistrie.controller('PieceCtrl', ['$scope', 'Pieces', function ($scope, Pieces)
 
    	.controller('ContactCtrl', ['$scope', function ($scope) {
 
-   	}]);
+   	}])
+
+    .controller('HomeCtrl',  ['$scope', function ($scope) {
+
+    }]);
