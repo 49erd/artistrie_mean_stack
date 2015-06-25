@@ -1,8 +1,10 @@
-<img src="{{piece.img_url}}" alt="">
-  <h1>{{piece.title}}</h1>
-  description: <textarea ng-model="piece.description"></textarea><br><br>
+<div class="col-xs-8 col-xs-offset-2 text-center">
+	<img src="{{piece.img_url}}" alt="" class="detailImage">
+	  <h1>{{piece.title}}</h1>
+	  description: <textarea ng-model="piece.description"></textarea><br><br>
 
-  <button ng-click="update()">Update</button>
-  <button ng-click="remove()">remove</button>
-  <a href="/">Cancel</a>
-</script>
+	  <button ng-click="update()">Update</button>
+	  <button ng-click="remove()">remove</button>
+	  <a href="#/list">Cancel</a>
+	</script>
+</div>
