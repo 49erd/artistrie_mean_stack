@@ -13,16 +13,19 @@ Artistrie.config(function ($routeProvider) {
       .when('/list', {
         templateUrl: '/partials/art-list.html',
         controller: 'PieceCtrl',
+        css: 'stylesheets/list.css'
       })
     
       .when('/list/:id', {
         templateUrl: '/partials/art-detail.html',
-        controller: 'PieceDetailCtrl'
+        controller: 'PieceDetailCtrl',
+        css: 'stylesheets/detail.css'
       })
 
       .when('/contact', {
       	templateUrl: '/partials/contact.html',
-      	controller: 'ContactCtrl'
+      	controller: 'ContactCtrl',
+        css: 'stylesheets/contact.css'
       })
 
       .otherwise({

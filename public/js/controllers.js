@@ -46,13 +46,13 @@ Artistrie.controller('PieceCtrl', ['$scope', 'Pieces', function ($scope, Pieces)
 
       $scope.update = function(){
         Pieces.update({id: $scope.piece._id}, $scope.piece, function(){
-          $location.url('/');
+          $location.url('/list');
         });
       }
 
       $scope.remove = function(){
         Pieces.remove({id: $scope.piece._id}, function(){
-          $location.url('/');
+          $location.url('/list');
         });
       }
     }])
