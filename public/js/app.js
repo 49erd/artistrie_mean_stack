@@ -28,6 +28,12 @@ Artistrie.config(function ($routeProvider) {
         css: 'stylesheets/contact.css'
       })
 
+      .when('/about', {
+        templateUrl: '/partials/about.html',
+        controller: 'AboutCtrl',
+        css: 'stylesheets/about.css'
+      })
+
       .otherwise({
       	redirectTo: '/'
       });
