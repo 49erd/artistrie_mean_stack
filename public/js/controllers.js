@@ -66,5 +66,5 @@ Artistrie.controller('PieceCtrl', ['$scope', 'Pieces', function ($scope, Pieces)
     }])
 
     .controller('AboutCtrl', ['$scope', function ($scope) {
-      
+    
     }]);
