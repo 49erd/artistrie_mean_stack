@@ -1,6 +1,11 @@
 body {
-	background: url("http://www.designbolts.com/wp-content/uploads/2014/03/Blue-Blur-Background1.jpg") no-repeat center center fixed;
-	background-size: cover;
+	/* background: url("http://www.designbolts.com/wp-content/uploads/2014/03/Blue-Blur-Background1.jpg") no-repeat center center fixed;*/
+	/* background-size: cover;*/
+	background-color: #eee;
+}
+
+.piece a {
+	text-decoration: none;
 }
 
 .pieceModal {

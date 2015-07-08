@@ -1,124 +1,50 @@
-<!-- <div class="container">
-	<div class="row">
-		<div class="col-xs-6 col-xs-offset-3 text-center">
-			Search: <input type="text" ng-model="search.title"><br>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-6 col-xs-offset-3 text-center">
-			Submit New Entry:
-			<form ng-model="newPiece">
-	          	<input type="text" ng-model="pieceTitle" placeholder="title"><br>
-	            <textarea ng-model="pieceDescription" placeholder="Describe your art piece" required></textarea><br>
-	            <input type="text" ng-model="pieceImage" placeholder="image url"><br>
-	            <button class="btn btn-primary" ng-click="save()">Submit</button>
-    		</form>
-		</div>
-	</div>
-</div>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-8 col-xs-offset-2 text-center">
-			<ul>
-			    <span ng-repeat="piece in pieces | filter: search">
-			   		<a href=#/list/{{piece._id}}><h2>{{piece.title}}<h2></a>
-			   		<a href=#/list/{{piece._id}}><img src="{{piece.img_url}}" alt=""></a><br>
-			   		<h4>Description: {{piece.description}}</h4>
-			   		<a ng-show="!editing[$index]" href="#/"></a>
-
-			    	<button ng-show="!editing[$index]" ng-click="edit($index)">edit</button>
-
-			      <input ng-show="editing[$index]" type="text" ng-model="piece.description">
-			      <button ng-show="editing[$index]" ng-click="update($index)">Update</button>
-			      <button ng-show="editing[$index]" ng-click="cancel($index)">Cancel</button>
-
-			    </span>
-  			</ul>
-		</div>
-	</div>
-</div> -->
-<!-- <div class="container">
-	<form class="form-horizontal" ng-model="newPiece">
-	  	<div class="form-group">
-	    	<label class="col-sm-2 control-label">Title:</label>
-	    	<div class="col-sm-10">
-	    		<input type="text" ng-model="pieceTitle" ng-disabled="!edit" placeholder="Name of art piece" required>
-	    	</div>
-	  	</div> 
-	  	<div class="form-group">
-	    	<label class="col-sm-2 control-label">Description:</label>
-	    	<div class="col-sm-10">
-	    		<textarea ng-model="pieceDescription" ng-disabled="!edit" placeholder="Describe your art piece" required></textarea>
-	    	</div>
-	  	</div>
-		<div class="form-group">
-	    	<label class="col-sm-2 control-label">Image URL</label>
-	    	<div class="col-sm-10">
-	    		<input type="text" ng-model="pieceImage" ng-disabled="!edit" placeholder="Image URL" required>
-	    	</div>
-	  	</div>
-	</form>
-	<button class="btn btn-success" ng-disabled="error || incomplete" ng-click="save()">
-		<span class="glyphicon glyphicon-save"></span>  Submit
-	</button>
-</div>
-<hr>
- -->
-
-<div class="container">
-	<div class="row">
-		<h2 class="text-center">Entries:</h2>
-		<br>
-	 	<span ng-repeat="piece in pieces">
-		  <div class="col-xs-4">
-		    <a href=#/list/{{piece._id}} class="thumbnail">
-		      <h4 class="text-center">{{piece.title}}</h4> 
-		      <img src="{{piece.img_url}}" alt="{{piece.title}}" style="width:150px;height:150px">
-		      <br>
-		      <p class="text-center">{{piece.description}}</p>
+		<div class="col-sm-9">
+		  <div class="col-sm-4 col-md-3 col-lg-2"  ng-repeat="piece in pieces" class="piece">
+		    <a href="#/list/{{piece._id}}">
+		      <img src="{{piece.img_url}}" alt="{{piece.title}}" class="img-responsive">
+		      <h4>{{piece.title}}</h4>
 		    </a>
+		    <p class="text-muted">{{piece.description}}</p>
 		  </div>
-		</span>
+		</div>
+			<div class="col-sm-3">
+				<h2>Completely Random Art Submission Contest</h2>
+				<p>Want to submit something?  Go ahead, see if we care.  There are no restrictions to what you can put on this page.  We're very curious to see what happens here.</p>
+				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary btn-sm center-block">Add Art Piece</button></div>
+			</div>
 	</div>
-
 </div>
-<div class="panel-fixed text-center fixed-bottom pieceModal">     
-	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Art</button>
-	<div id="myModal" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
 
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Add Art Piece</h4>
-	      </div>
-			<form class="form-horizontal" ng-model="newPiece">
-			  	<div class="form-group">
-			    	<label class="col-sm-2 control-label">Title:</label>
-			    	<div class="col-sm-10">
-			    		<input type="text" ng-model="pieceTitle" ng-disabled="!edit" placeholder="Name of art piece" required>
-			    	</div>
-			  	</div> 
-			  	<div class="form-group">
-			    	<label class="col-sm-2 control-label">Description:</label>
-			    	<div class="col-sm-10">
-			    		<textarea ng-model="pieceDescription" ng-disabled="!edit" placeholder="Describe your art piece" required></textarea>
-			    	</div>
-			  	</div>
-				<div class="form-group">
-			    	<label class="col-sm-2 control-label">Image URL</label>
-			    	<div class="col-sm-10">
-			    		<input type="text" ng-model="pieceImage" ng-disabled="!edit" placeholder="Image URL" required>
-			    	</div>
-			  	</div>
-			</form>
-		    <button class="btn btn-success" ng-disabled="error || incomplete" ng-click="save()">
-				<span class="glyphicon glyphicon-save"></span>  Submit
-			</button><br>
-	      </div>
-	    </div>
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h3 class="modal-title" id="lineModalLabel">Submit New Art Piece</h3>
+			</div>
+			<div class="modal-body">
+				
+	            <!-- content goes here -->
+				<form>
+	        <div class="form-group">
+	          <label for="pieceTitle">Title</label>
+	          <input type="text" class="form-control" ng-model="pieceTitle" placeholder="Title of art piece" required>
+	        </div>
+	        <div class="form-group">
+	          <label for="pieceDescription">Description</label>
+	          <input type="text" class="form-control" ng-model="pieceDescription" placeholder="Describe your art piece">
+	        </div>
+	        <div class="form-group">
+	          <label for="pieceDescription">Image URL</label>
+	          <input type="url" class="form-control" ng-model="pieceImage" placeholder="Image URL" required>
+	        </div>
+					<hr>
+	        <button type="submit" ng-disabled="error || incomplete" ng-click="save()" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>  Submit</button>
+      </form>
 
-	  </div>
-	</div>
+			</div>
+		</div>
+  </div>
 </div>
