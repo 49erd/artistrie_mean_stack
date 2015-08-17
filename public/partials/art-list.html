@@ -1,0 +1,50 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-9">
+		  <div class="col-sm-4 col-md-3 col-lg-2"  ng-repeat="piece in pieces" class="piece">
+		    <a href="#/list/{{piece._id}}">
+		      <img src="{{piece.img_url}}" alt="{{piece.title}}" class="img-responsive">
+		      <h4>{{piece.title}}</h4>
+		    </a>
+		    <p class="text-muted">{{piece.description}}</p>
+		  </div>
+		</div>
+			<div class="col-sm-3">
+				<h2>Completely Random Art Submission Contest</h2>
+				<p>Want to submit something?  Go ahead, see if we care.  There are no restrictions to what you can put on this page.  We're very curious to see what happens here.</p>
+				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary btn-sm center-block">Add Art Piece</button></div>
+			</div>
+	</div>
+</div>
+
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h3 class="modal-title" id="lineModalLabel">Submit New Art Piece</h3>
+			</div>
+			<div class="modal-body">
+				
+	            <!-- content goes here -->
+				<form>
+	        <div class="form-group">
+	          <label for="pieceTitle">Title</label>
+	          <input type="text" class="form-control" ng-model="pieceTitle" placeholder="Title of art piece" required>
+	        </div>
+	        <div class="form-group">
+	          <label for="pieceDescription">Description</label>
+	          <input type="text" class="form-control" ng-model="pieceDescription" placeholder="Describe your art piece">
+	        </div>
+	        <div class="form-group">
+	          <label for="pieceDescription">Image URL</label>
+	          <input type="url" class="form-control" ng-model="pieceImage" placeholder="Image URL" required>
+	        </div>
+					<hr>
+	        <button type="submit" ng-disabled="error || incomplete" ng-click="save()" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>  Submit</button>
+      </form>
+
+			</div>
+		</div>
+  </div>
+</div>
